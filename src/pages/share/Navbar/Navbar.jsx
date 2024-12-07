@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import icon from "../../../assets/icons/images.png";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  // const user = false;
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
-    <div className="navbar bg-slate-100">
+    <div className="navbar  bg-black bg-opacity-20 text-white">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">
           <img src={icon} className="max-w-10 max-h-10" alt="" />
@@ -11,16 +22,33 @@ const Navbar = () => {
         </a>
       </div>
       <div className="flex-none gap-2">
-        {/* <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
-        </div> */}
         <div className="flex justify-center items-center">
-          <p>Home</p>
-          <p className="mx-2">MemerShip</p>
+          <NavLink
+            to="/home"
+            style={({ isActive, isPending, isTransitioning }) => {
+              return {
+                background: isActive ? "none" : "",
+                color: isActive ? "#EEFF25" : "white",
+                fontWeight: isActive ? "bold" : "",
+              };
+            }}
+          >
+            HOME
+          </NavLink>
+          <NavLink
+            to="/membership"
+            style={({ isActive, isPending, isTransitioning }) => {
+              return {
+                background: isActive ? "none" : "",
+                color: isActive ? "#EEFF25" : "white",
+                fontWeight: isActive ? "bold" : "",
+                marginRight: "10px",
+                marginLeft: "10px",
+              };
+            }}
+          >
+            MEMBERSHIP
+          </NavLink>
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
@@ -54,20 +82,39 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a className="justify-between">Uername</a>
-            </li>
-            <li>
-              <a>Dashboard</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
+          {user ? (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a className="justify-between">Uername</a>
+              </li>
+              <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+              <li>
+                <NavLink onClick={handleLogOut}>Logout</NavLink>
+              </li>
+            </ul>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/login"
+                  style={({ isActive, isPending, isTransitioning }) => {
+                    return {
+                      background: isActive ? "none" : "",
+                      color: isActive ? "#EEFF25" : "white",
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}
+                >
+                  LOGIN
+                </NavLink>
+              </li>
+            </>
+          )}
         </div>
       </div>
     </div>
