@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  console.log(user);
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -16,10 +16,10 @@ const Navbar = () => {
   return (
     <div className="navbar  bg-black bg-opacity-20 text-white">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">
+        <NavLink to="/" className="btn btn-ghost text-xl">
           <img src={icon} className="max-w-10 max-h-10" alt="" />
           FORUMS
-        </a>
+        </NavLink>
       </div>
       <div className="flex-none gap-2">
         <div className="flex justify-center items-center">
@@ -70,36 +70,40 @@ const Navbar = () => {
           </button>
         </div>
         <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
           {user ? (
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">Uername</a>
-              </li>
-              <li>
-                <NavLink to="/dashboard">Dashboard</NavLink>
-              </li>
-              <li>
-                <NavLink onClick={handleLogOut}>Logout</NavLink>
-              </li>
-            </ul>
+            <>
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user.photoURL}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between pointer-events-none">
+                    {user.displayName}
+                  </a>
+                </li>
+                <li>
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </li>
+                <li>
+                  <a onClick={handleLogOut}>Logout</a>
+                </li>
+              </ul>
+            </>
           ) : (
             <>
-              <li>
+              <p>
                 <NavLink
                   to="/login"
                   style={({ isActive, isPending, isTransitioning }) => {
@@ -112,7 +116,7 @@ const Navbar = () => {
                 >
                   LOGIN
                 </NavLink>
-              </li>
+              </p>
             </>
           )}
         </div>

@@ -1,7 +1,14 @@
 import React from "react";
+import Banner from "../Banner/Banner";
+import Tags from "../Tags/Tags";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <Banner></Banner>
+      <Tags></Tags>
+    </>
+  );
 };
 
 export default Home;

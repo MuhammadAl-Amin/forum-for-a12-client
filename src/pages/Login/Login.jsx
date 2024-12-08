@@ -113,7 +113,10 @@ const Login = () => {
                 />
               </div>
               <p>
-                New here? <Link to="/signUp">Create New Account</Link>{" "}
+                New here?{" "}
+                <Link to="/signUp" className="text-[#D1A054B2] underline">
+                  Create New Account
+                </Link>{" "}
               </p>
             </form>
           </div>

@@ -4,6 +4,8 @@ import Home from "../Home/Home/Home";
 import Membership from "../membership/membership";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Dashboard/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/membership",
-        element: <Membership></Membership>,
+        element: (
+          <PrivateRoute>
+            <Membership></Membership>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -29,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
     ],
   },
