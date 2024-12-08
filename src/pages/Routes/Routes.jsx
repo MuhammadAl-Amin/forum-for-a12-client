@@ -6,6 +6,9 @@ import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard/Dashboard";
+import Profile from "../Dashboard/Profile/Profile";
+import AddPost from "../Dashboard/AddPost/AddPost";
+import MyPost from "../Dashboard/MyPost/MyPost";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +46,20 @@ const router = createBrowserRouter([
             <Dashboard></Dashboard>
           </PrivateRoute>
         ),
+        children: [
+          {
+            path: "dashboard/profile",
+            element: <Profile></Profile>,
+          },
+          {
+            path: "dashboard/addpost",
+            element: <AddPost></AddPost>,
+          },
+          {
+            path: "dashboard/mypost",
+            element: <MyPost></MyPost>,
+          },
+        ],
       },
     ],
   },
