@@ -9,7 +9,7 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/Firebase.config";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
 
