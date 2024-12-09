@@ -3,6 +3,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
+import { FaShare } from "react-icons/fa";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -22,10 +23,7 @@ const PostDetails = () => {
           <img src={posts?.photoURL} className="" alt="Album" />
         </figure>
         <div className="card-body w-full">
-          <div className="card-title text-2xl">
-            <span className="font-semibold text-base">Title :</span>{" "}
-            {posts?.title}
-          </div>
+          <div className="card-title text-2xl">{posts?.title}</div>
           <h5>
             <span className="font-semibold">Author Name:</span> {posts?.name}
           </h5>
@@ -38,14 +36,17 @@ const PostDetails = () => {
           </p>
           <h6>Post Date : {posts?.date}</h6>
 
-          <div className="card-actions justify-between">
+          <div className="card-actions justify-between items-center">
             <div>
               <button className="btn btn-active">Comment</button>
             </div>
-            <p className="flex justify-center gap-3">
-              <BiUpvote className="w-8 h-8" />
+            <p className=" flex">
+              <p className="flex justify-center gap-3">
+                <BiUpvote className="w-8 h-8" />
 
-              <BiDownvote className="w-8 h-8" alt="Down Vote" />
+                <BiDownvote className="w-8 h-8" alt="Down Vote" />
+              </p>{" "}
+              <FaShare className="w-8 h-8" />
             </p>
           </div>
         </div>
