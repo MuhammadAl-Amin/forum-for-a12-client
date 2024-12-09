@@ -9,6 +9,7 @@ import Dashboard from "../Dashboard/Dashboard/Dashboard";
 import Profile from "../Dashboard/Profile/Profile";
 import AddPost from "../Dashboard/AddPost/AddPost";
 import MyPost from "../Dashboard/MyPost/MyPost";
+import PostDetails from "../PostDetails/PostDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home></Home>,
+      },
+      {
+        path: "/posts/:id",
+        element: (
+          <PrivateRoute>
+            <PostDetails></PostDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/membership",

@@ -37,6 +37,7 @@ const AddPost = () => {
       tag: tag,
       title: title,
       description: description,
+      date: new Date(),
       upVote: 0,
       downVote: 0,
     };

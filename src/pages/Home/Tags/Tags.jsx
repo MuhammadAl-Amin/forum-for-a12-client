@@ -6,7 +6,7 @@ const Tags = () => {
       <div>
         <p className="text-4xl font-bold mb-7">YOU CAN POSTS ABOUT</p>
       </div>
-      <div className="flex justify-evenly gap-3">
+      <div className="sm:flex justify-evenly gap-3">
         <p className="font-semibold bg-info p-1 rounded-lg shadow-lg">
           Technologis
         </p>

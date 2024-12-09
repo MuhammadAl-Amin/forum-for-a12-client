@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Banner></Banner>
-      <div className="flex justify-between">
+      <div className="md:flex justify-between">
         <Tags></Tags>
         <Anouncement></Anouncement>
       </div>
