@@ -3,11 +3,25 @@ import React, { useContext, useRef } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
+
+  const axiosSecure = useAxiosSecure();
   const formRef = useRef(null);
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: async (userInfo) => {
+      const res = await axiosSecure.post("/users", userInfo);
+      return res.data;
+    },
+    onError: (error) => {
+      console.error("Error creating user:", error);
+    },
+  });
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -40,6 +54,13 @@ const SignUp = () => {
         navigate("/");
       });
     });
+    const userInfo = {
+      name: name,
+      photoURL: photo,
+      email: email,
+      badge: "BRONZE",
+    };
+    mutation.mutate(userInfo);
   };
   return (
     <div>

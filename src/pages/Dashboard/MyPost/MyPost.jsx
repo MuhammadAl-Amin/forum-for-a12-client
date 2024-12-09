@@ -1,33 +1,47 @@
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../hooks/useAuth";
 
 const MyPost = () => {
+  const user = useAuth();
+  console.log(user);
   const axiosSecure = useAxiosSecure();
-  const { data: posts = [], refetch } = useQuery({
-    queryKey: ["posts"],
+  const { data: myPosts = [], refetch } = useQuery({
+    queryKey: ["myposts"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/posts");
+      const res = await axiosSecure.get(`/myposts?email=${user?.user?.email}`);
       return res.data;
     },
   });
-  console.log(posts);
+  console.log(myPosts);
   return (
-    <div className="mx-2">
-      <h1 className="text-3xl font-bold text-center my-5">MyPost</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {posts.map((post) => (
-          <div key={post._id}>
-            <div className="card bg-base-100 w-96 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">{post.title}</h2>
-                <p>{post.description}</p>
-                <div className="card-actions justify-end"></div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="overflow-x-auto">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th>Post Title</th>
+            <th>Up Vote</th>
+            <th>Down Vote</th>
+            <th>Comments</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPosts.map((post) => (
+            <tr key={post._id}>
+              <td>{post.title}</td>
+              <td>{post.upVote}</td>
+              <td>{post.downVote}</td>
+              <td>{post.comments}</td>
+              <td>
+                <button>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

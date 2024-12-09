@@ -1,8 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useRef } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const AddPost = () => {
+  const user = useAuth();
+  console.log(user.user.email);
   const formRef = useRef(null);
   console.log(formRef);
   const axiosSecure = useAxiosSecure();
@@ -34,6 +37,8 @@ const AddPost = () => {
       tag: tag,
       title: title,
       description: description,
+      upVote: 0,
+      downVote: 0,
     };
     mutation.mutate(postInfo);
   };
@@ -73,10 +78,10 @@ const AddPost = () => {
               </label>
               <input
                 type="email"
-                placeholder="email"
+                defaultValue={user.user.email}
+                readOnly
                 name="email"
                 className="input input-bordered"
-                required
               />
             </div>
             <div className="form-control">
