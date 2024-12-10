@@ -1,17 +1,16 @@
 import React from "react";
 import Banner from "../Banner/Banner";
-import Tags from "../Tags/Tags";
 import AllPost from "../AllPost/AllPost";
-import Anouncement from "../Anouncement/Anouncement";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>PostStream | Home</title>
+      </Helmet>
       <Banner></Banner>
-      <div className="md:flex justify-between">
-        <Tags></Tags>
-        <Anouncement></Anouncement>
-      </div>
+
       <AllPost></AllPost>
     </>
   );

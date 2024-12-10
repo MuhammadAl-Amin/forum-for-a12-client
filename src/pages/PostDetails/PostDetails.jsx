@@ -18,9 +18,9 @@ const PostDetails = () => {
   console.log(posts);
   return (
     <div className="mx-2 my-2">
-      <div className="card lg:card-side bg-base-100 shadow-xl">
+      <div className="card bg-base-100 shadow-xl">
         <figure>
-          <img src={posts?.photoURL} className="" alt="Album" />
+          <img src={posts?.photoURL} className="w-1/2 h-1/2" alt="Album" />
         </figure>
         <div className="card-body w-full">
           <div className="card-title text-2xl">{posts?.title}</div>

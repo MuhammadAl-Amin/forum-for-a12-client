@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <div className="flex justify-between">
       <Helmet>
-        <title>FORUM | Dashboard</title>
+        <title>PostStream | Dashboard</title>
       </Helmet>
       <div className="bg-green-300 w-52 min-h-screen flex flex-col">
         <NavLink

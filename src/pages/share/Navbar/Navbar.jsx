@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="flex-1">
         <NavLink to="/" className="btn btn-ghost text-xl">
           <img src={icon} className="max-w-10 max-h-10" alt="" />
-          FORUMS
+          PostStream
         </NavLink>
       </div>
       <div className="flex-none gap-2">

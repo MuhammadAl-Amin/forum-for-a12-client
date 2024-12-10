@@ -26,7 +26,7 @@ const Profile = () => {
           <h2 className="card-title">{user?.name}</h2>
           <p>Email: {user?.email}</p>
           <div className="card-actions justify-end">
-            <div className="font-semibold bg-orange-700 border-2 p-1 rounded-badge">
+            <div className="text-yellow-600 font-semibold bg-amber-100 border-2 p-1 rounded-badge">
               {user?.badge}
             </div>
           </div>
