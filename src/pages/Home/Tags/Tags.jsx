@@ -7,7 +7,7 @@ const Tags = () => {
       <div>
         <p className="text-4xl font-bold mb-7">
           YOU CAN POSTS ABOUT <br />
-          <span className="text-3xl bg-red-600 font-bold px-2">
+          <span className="text-3xl bg-red-600 font-bold px-2 ">
             <Typewriter
               words={[
                 "Technologis",
