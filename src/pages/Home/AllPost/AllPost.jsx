@@ -13,6 +13,7 @@ const AllPost = () => {
       return res.data;
     },
   });
+
   const handleDetailsPost = (id) => {
     navigate(`/posts/${id}`);
   };
@@ -31,7 +32,9 @@ const AllPost = () => {
                 className="card bg-base-100 min-h-full shadow-xl"
               >
                 <div className="card-body">
-                  {post.photoURL && <img src={post.photoURL} alt="Post" />}
+                  {Array.isArray(posts) && post.photoURL && (
+                    <img src={post.photoURL} alt="Post" />
+                  )}
                   <h2 className="card-title">{post.title}</h2>
                   <p>{post.tag}*</p>
                   <p>{post.description}</p>
