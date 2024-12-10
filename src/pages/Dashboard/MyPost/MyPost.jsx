@@ -29,17 +29,18 @@ const MyPost = () => {
           </tr>
         </thead>
         <tbody>
-          {myPosts.map((post) => (
-            <tr key={post._id}>
-              <td>{post.title}</td>
-              <td>{post.upVote}</td>
-              <td>{post.downVote}</td>
-              <td>{post.comments}</td>
-              <td>
-                <button>Delete</button>
-              </td>
-            </tr>
-          ))}
+          {Array.isArray(myPosts) &&
+            myPosts.map((post) => (
+              <tr key={post._id}>
+                <td>{post.title}</td>
+                <td>{post.upVote}</td>
+                <td>{post.downVote}</td>
+                <td>{post.comments}</td>
+                <td>
+                  <button>Delete</button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
