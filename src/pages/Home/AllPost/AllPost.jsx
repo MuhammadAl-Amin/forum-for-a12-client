@@ -48,7 +48,13 @@ const AllPost = () => {
                 className="card bg-base-100 min-h-full shadow-xl"
               >
                 <div className="card-body">
-                  {post.photoURL && <img src={post.photoURL} alt="Post" />}
+                  {post.photoURL && (
+                    <img
+                      src={post.photoURL}
+                      className="w-24 h-24 rounded-full"
+                      alt="Post"
+                    />
+                  )}
                   <h2 className="card-title">{post.title}</h2>
                   <p>{post.tag}</p>
                   <p>{post.description}</p>
