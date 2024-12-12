@@ -1,6 +1,6 @@
 import React from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import { FaShare } from "react-icons/fa";
@@ -17,14 +17,12 @@ const PostDetails = () => {
     },
   });
 
-  // const handleUpvote = async () => {
-  //   try {
-  //     await axiosSecure.patch(`/posts/upvote/${id}`);
-  //     refetch(); // Refresh post data after upvoting
-  //   } catch (error) {
-  //     console.error("Failed to upvote post", error);
-  //   }
-  // };
+  const mutation = useMutation({
+    mutationFn: async (voteInfo) => {
+      const res = await axiosSecure.post("/votes", voteInfo);
+      return res.data;
+    },
+  });
 
   // const handleDownvote = async () => {
   //   try {
@@ -34,6 +32,69 @@ const PostDetails = () => {
   //     console.error("Failed to downvote post", error);
   //   }
   // };
+
+  const { data: votes = [], refetch: refetchVotes } = useQuery({
+    queryKey: ["votes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/votes");
+      return res.data;
+    },
+  });
+  const handleUpvote = () => {
+    const voteInfo = {
+      postId: id,
+      voterEmail: post?.email,
+      upVote: 1,
+    };
+    let findVote = votes.find(
+      (vote) => vote.postId === id && vote.voterEmail === post?.email
+    );
+    if (findVote) {
+      return;
+    } else {
+      mutation.mutate(voteInfo, {
+        onSuccess: () => {
+          refetch();
+        },
+        onError: (error) => {
+          console.error("Failed to upvote post", error);
+        },
+      });
+    }
+  };
+  const handleDownvote = () => {
+    const downVoteInfo = {
+      postId: id,
+      voterEmail: post?.email,
+      downVote: 1,
+    };
+    let findVote = votes.find(
+      (vote) => vote.postId === id && vote.voterEmail === post?.email
+    );
+    if (findVote) {
+      return;
+    } else {
+      mutation.mutate(downVoteInfo, {
+        onSuccess: () => {
+          console.log("success");
+          refetch();
+        },
+        onError: (error) => {
+          console.error("Failed to upvote post", error);
+        },
+      });
+    }
+  };
+  refetchVotes();
+  let totalUpVotes = votes.reduce(
+    (total, item) => total + (item.upVote || 0),
+    0
+  );
+  let totalDownVotes = votes.reduce(
+    (total, items) => total + (items.downVote || 0),
+    0
+  );
+  console.log(totalDownVotes);
 
   return (
     <div className="mx-2 my-2">
@@ -60,13 +121,13 @@ const PostDetails = () => {
               <button className="btn btn-active">Comment</button>
             </div>
             <div className="flex justify-center gap-3 items-center">
-              <button className="flex items-center">
+              <button onClick={handleUpvote} className="flex items-center">
                 <BiUpvote className="w-8 h-8" />
-                <span>{post?.upVote || 0}</span>
+                <span>{totalUpVotes}</span>
               </button>
-              <button className="flex items-center">
+              <button onClick={handleDownvote} className="flex items-center">
                 <BiDownvote className="w-8 h-8" />
-                <span>{post?.downVote || 0}</span>
+                <span>{totalDownVotes}</span>
               </button>
               <FaShare className="w-8 h-8" />
             </div>
