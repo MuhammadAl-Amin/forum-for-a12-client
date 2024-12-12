@@ -37,7 +37,7 @@ const SignUp = () => {
       return Swal.fire({
         icon: "error",
         title: "Error...",
-        text: "Password showed be minimum '6 digit' and at least 'one uppercase' and 'one lowercase'.",
+        text: "Password showed be minimum '6 digit' and at least 'one number' and, 'one uppercase' and 'one lowercase'.",
       });
     }
 

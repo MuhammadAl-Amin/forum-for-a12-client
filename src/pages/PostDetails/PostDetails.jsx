@@ -17,23 +17,23 @@ const PostDetails = () => {
     },
   });
 
-  const handleUpvote = async () => {
-    try {
-      await axiosSecure.patch(`/posts/upvote/${id}`);
-      refetch(); // Refresh post data after upvoting
-    } catch (error) {
-      console.error("Failed to upvote post", error);
-    }
-  };
+  // const handleUpvote = async () => {
+  //   try {
+  //     await axiosSecure.patch(`/posts/upvote/${id}`);
+  //     refetch(); // Refresh post data after upvoting
+  //   } catch (error) {
+  //     console.error("Failed to upvote post", error);
+  //   }
+  // };
 
-  const handleDownvote = async () => {
-    try {
-      await axiosSecure.patch(`/posts/downvote/${id}`);
-      refetch(); // Refresh post data after downvoting
-    } catch (error) {
-      console.error("Failed to downvote post", error);
-    }
-  };
+  // const handleDownvote = async () => {
+  //   try {
+  //     await axiosSecure.patch(`/posts/downvote/${id}`);
+  //     refetch(); // Refresh post data after downvoting
+  //   } catch (error) {
+  //     console.error("Failed to downvote post", error);
+  //   }
+  // };
 
   return (
     <div className="mx-2 my-2">
@@ -60,11 +60,11 @@ const PostDetails = () => {
               <button className="btn btn-active">Comment</button>
             </div>
             <div className="flex justify-center gap-3 items-center">
-              <button onClick={handleUpvote} className="flex items-center">
+              <button className="flex items-center">
                 <BiUpvote className="w-8 h-8" />
                 <span>{post?.upVote || 0}</span>
               </button>
-              <button onClick={handleDownvote} className="flex items-center">
+              <button className="flex items-center">
                 <BiDownvote className="w-8 h-8" />
                 <span>{post?.downVote || 0}</span>
               </button>
